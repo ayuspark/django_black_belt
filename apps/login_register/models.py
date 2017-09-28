@@ -11,3 +11,7 @@ from datetime import date
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
     birthday = models.DateField()
+
+
+class Friendship(models.Model):
+    friends = models.ManyToManyField(User, related_name='friends')

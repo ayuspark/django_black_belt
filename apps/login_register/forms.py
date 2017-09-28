@@ -76,7 +76,9 @@ class UserRegistrationForm(forms.ModelForm):
     
 
 class ProfileForm(forms.ModelForm):
-    birthday = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'}))
+    birthday = forms.DateField(widget=forms.DateInput(format="%m/%d/%Y",
+                                                      attrs={'class': 'form-control',
+                                                             'type': 'date'}))
 
     class Meta:
         model = UserProfile
