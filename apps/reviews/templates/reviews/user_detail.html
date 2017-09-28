@@ -1,0 +1,22 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+    <h2>Hi, I am {{ user_query.username }}!</h2>
+    <h3>Name: {{ user_query.first_name.title }} {{ user_query.last_name.title }}</h3>
+    <h3>Email: {{ user_query.email }}</h3>
+    <h3>Total reviews: {{ reviews_query_count }}</h3>
+
+    <h2>Posted reviews on the following books</h2>
+    <ul>
+        {% for review in reviews_query %}
+            <li>
+                <a href="{% url 'reviews:book_detail' book_id=review.book.id %}">
+                    {{ review.book.title.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+{% endblock %}
