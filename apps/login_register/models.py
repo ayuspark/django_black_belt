@@ -13,5 +13,10 @@ class UserProfile(models.Model):
     birthday = models.DateField()
 
 
+class Friend(models.Model):
+    # friend = models.CharField(max_length=12)
+    friend_username = models.OneToOneField(User, related_name='friend')
+
+
 class Friendship(models.Model):
-    friends = models.ManyToManyField(User, related_name='friends')
+    friendship = models.ManyToManyField(User, related_name='fs')
