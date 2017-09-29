@@ -7,12 +7,16 @@ User = get_user_model()
 
 
 class TravelPlanForm(forms.ModelForm):
+    destination = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    desc = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     start_date = forms.DateField(widget=forms.DateInput(format="%m/%d/%Y",
                                                         attrs={'class': 'form-control',
-                                                               'type': 'date'}))
+                                                               'type': 'date'}),
+                                 label='Travel Date From:')
     end_date = forms.DateField(widget=forms.DateInput(format="%m/%d/%Y",
                                                       attrs={'class': 'form-control',
-                                                             'type': 'date'}))
+                                                             'type': 'date'}),
+                               label='Travel Date To:')
 
     class Meta:
         model = TravelPlan
@@ -21,10 +25,10 @@ class TravelPlanForm(forms.ModelForm):
     def clean(self):
         start_date = self.cleaned_data.get('start_date')
         end_date = self.cleaned_data.get('end_date')
-        if start_date < datetime.date.today() or end_date < datetime.date.today():
+        if start_date < date.today() or end_date < date.today():
             raise forms.ValidationError('The date cannot be in the past')
         if start_date > end_date:
-            raise forms.ValidationError('Something wrong with your start/end date')
+            raise forms.ValidationError('How can you end before you start?!')
         return super(TravelPlanForm, self).clean()
 
 # class BookForm(forms.ModelForm):

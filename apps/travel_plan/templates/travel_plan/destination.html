@@ -1,0 +1,20 @@
+{% extends 'travel_plan/base.html' %}
+
+{% block content %}
+   <h2>{{ plan.destination.title }}</h2>
+   <ul>
+       <li>Planned by: {{ plan.creator.first_name.title }} {{ plan.creator.last_name.title }}</li>
+       <li>Description: {{ plan.desc }}</li>
+       <li>Travel Date From: {{ plan.start_date }}</li>
+       <li>Travel Date To: {{ plan.end_date }}</li>
+   </ul>
+
+   <h2>Other Users joining the Trip:</h2>
+   <ul>
+       {% for user in plan.join.all %}
+       <li>{{ user.first_name.title }} {{ user.last_name.title }}</li>
+       {% endfor %}
+   </ul>
+   
+
+{% endblock %}

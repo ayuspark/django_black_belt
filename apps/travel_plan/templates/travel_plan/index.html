@@ -18,7 +18,11 @@
         <!-- plans created by user -->
         {% for plan in plans %}
         <tr>
-            <td>{{ plan.destination }}</td>
+            <td>
+                <a href="{% url 'travel_plan:plan_destination' plan_id=plan.id %}">
+                    {{ plan.destination }}
+                </a>
+            </td>
             <td>{{ plan.start_date }}</td>
             <td>{{ plan.end_date }}</td>
             <td>{{ plan.desc }}</td>
@@ -27,7 +31,11 @@
         <!-- plans joined by user -->
         {% for plan in joined_plans %}
         <tr>
-            <td>{{ plan.destination }}</td>
+            <td>
+                <a href="{% url 'travel_plan:plan_destination' plan_id=plan.id %}">
+                    {{ plan.destination }}
+                </a>
+            </td>
             <td>{{ plan.start_date }}</td>
             <td>{{ plan.end_date }}</td>
             <td>{{ plan.desc }}</td>
@@ -47,7 +55,11 @@
         {% for plan in other_plans %}
         <tr>
             <td>{{ plan.creator.first_name.title }} {{ plan.creator.last_name.title }}</td>
-            <td>{{ plan.destination }}</td>
+            <td>
+                <a href="{% url 'travel_plan:plan_destination' plan_id=plan.id %}">
+                    {{ plan.destination }}
+                </a>
+            </td>
             <td>{{ plan.start_date }}</td>
             <td>{{ plan.end_date }}</td>
             <td><a href="{% url 'travel_plan:join' plan_id=plan.id %}">Join</a></td>
@@ -56,12 +68,9 @@
 
     </table>
 
-    <h3><a href="{% url 'travel_plan:add' %}">Add A Travel Plana</a></h3>
+    <h3><a href="{% url 'travel_plan:add' %}">Add A Travel Plan</a></h3>
 
-    <!-- <form action="">
-         {% csrf_token %}
-         {{ form.as_p }}
-    </form> -->
+   
 
 
 

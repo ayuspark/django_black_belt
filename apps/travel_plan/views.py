@@ -11,10 +11,6 @@ from .forms import *
 
 # Create your views here.
 def index(request):
-    # form = TravelPlanForm(request.POST or None)
-    # context = {
-    #     'form': form,
-    # }
     plans = request.user.plans.all()
     joined_plans = request.user.joined_plans.all()
     other_plans = TravelPlan.objects.exclude(creator=request.user).exclude(join=request.user).order_by('start_date')
@@ -33,4 +29,23 @@ def join(request, plan_id):
     user = request.user
     user.joined_plans.add(travel_plan)
     return redirect('travel_plan:index')
+
+
+@login_required(login_url='/')
+def add(request):
+    form = TravelPlanForm(request.POST or None)
+    context = {
+        'form': form,
+    }
+    if form.is_valid():
+        new_plan = form.save(commit=False)
+        new_plan.creator = request.user
+        new_plan.save()
+        return redirect('travel_plan:index')
+    return render(request, 'travel_plan/add.html', context)
+
+
+def plan_destination(request, plan_id):
+    plan = TravelPlan.objects.get(pk=plan_id)
+    return render(request, 'travel_plan/destination.html', {'plan': plan,})
 
