@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from .forms import *
@@ -42,7 +41,7 @@ def to_login(request):
         """
         user = authenticate(username=username, password=password)
         login(request, user)
-        # TODO: return redirect('reviews:index')
+        return redirect('travel_plan:index')
     return render(request, 'login_register/index.html', context)
 
 
@@ -62,8 +61,16 @@ def to_register(request):
     }
     if reg_form.is_valid() and profile_form.is_valid():
         new_user = reg_form.save(commit=False)
+        # get first_name and last_name for User Model
+        name = reg_form.cleaned_data.get('name')
+        first_name = name.split()[0]
+        last_name = name.split()[1]
+        new_user.first_name = first_name
+        new_user.last_name = last_name
+
         password = reg_form.cleaned_data.get('password')
         new_user.set_password(password)
+
         new_user.save()
         # save user profile
         user = get_user_model()
@@ -73,6 +80,6 @@ def to_register(request):
         # auto login after registration
         log_new_user = authenticate(username=new_user.username, password=password)
         login(request, log_new_user)
-        # TODO: return redirect('reviews:index')
+        return redirect('travel_plan:index')
     return render(request, 'login_register/index.html', context)
 

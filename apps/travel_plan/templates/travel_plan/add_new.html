@@ -1,0 +1,26 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+
+{% if messages %} {% for message in messages %}
+<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+    <p>{{ message }}</p>
+</div>
+{% endfor %} {% endif %}
+
+<form action="{% url 'reviews:add_book' %}" method="POST">
+    {% csrf_token %}
+    {{ book_form.as_p }}
+    {{ select_author_form.as_p }}
+    <fieldset>
+        <h5>Or create an author</h5>
+        {{ create_author_form.as_p }}
+        {{ review_form.as_p }}
+    </fieldset>
+    <input type="submit" class="btn" value="Submit" />
+</form>
+
+{% endblock %}

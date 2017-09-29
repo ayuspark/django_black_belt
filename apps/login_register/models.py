@@ -13,10 +13,10 @@ class UserProfile(models.Model):
     birthday = models.DateField()
 
 
-class Friend(models.Model):
-    # friend = models.CharField(max_length=12)
-    friend_username = models.OneToOneField(User, related_name='friend')
-
-
 class Friendship(models.Model):
-    friendship = models.ManyToManyField(User, related_name='fs')
+    friend_to_add = models.ForeignKey(User, related_name='friend_to_add', default=None)
+    user_who_requests = models.ForeignKey(User, related_name='user_who_requests', default=None)
+    friendships = models.ManyToManyField(User, related_name='friendships')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
