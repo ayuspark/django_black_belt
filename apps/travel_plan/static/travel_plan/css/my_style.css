@@ -10,3 +10,8 @@
 .navbar {
     margin-bottom: 10px;
 }
+
+.btn_block {
+    width: 300px;
+    color:darkslategray;
+}
