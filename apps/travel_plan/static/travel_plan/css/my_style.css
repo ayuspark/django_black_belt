@@ -15,3 +15,11 @@
     width: 300px;
     color:darkslategray;
 }
+
+.destination {
+    list-style: none;
+}
+
+.user_joined li {
+    list-style: none;
+}

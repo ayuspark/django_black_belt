@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="{% url 'travel_plan:add' %}" method="POST">
+<form class='col-md-8 form' action="{% url 'travel_plan:add' %}" method="POST">
          {% csrf_token %}
          {{ form.as_p }}
     <input type="submit" class="btn" value="Add" />

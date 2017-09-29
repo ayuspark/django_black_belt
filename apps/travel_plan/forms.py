@@ -8,7 +8,9 @@ User = get_user_model()
 
 class TravelPlanForm(forms.ModelForm):
     destination = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    desc = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    desc = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control',
+                                                        'rows': '3'}),
+                           label='Description:',)
     start_date = forms.DateField(widget=forms.DateInput(format="%m/%d/%Y",
                                                         attrs={'class': 'form-control',
                                                                'type': 'date'}),
