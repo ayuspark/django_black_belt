@@ -51,7 +51,10 @@ def to_register(request):
         # get first_name and last_name for User Model
         name = reg_form.cleaned_data.get('name')
         first_name = name.split()[0]
-        last_name = name.split()[1]
+        try:
+            last_name = ' '.join(name.split()[1:])
+        except:
+            last_name = ''
         new_user.first_name = first_name
         new_user.last_name = last_name
         # set user password
